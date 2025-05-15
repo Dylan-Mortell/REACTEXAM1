@@ -1,3 +1,6 @@
+const API_KEY = import.meta.env.VITE_TMDB_KEY;
+const BASE_URL = 'https://api.themoviedb.org/3';
+
 export const getMovies = () => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -64,10 +67,22 @@ export const getMovies = () => {
   };
 
   export const getTrendingMovies = () => {
-    return fetch(`https://api.themoviedb.org/3/movie/trending?api_key=${API_KEY}&language=en-US&page=1`)
+    return fetch(`${BASE_URL}/movie/trending?api_key=${API_KEY}&language=en-US&page=1`)
       .then((response) => {
         if (!response.ok) throw new Error(`Unable to fetch trending movies. Status: ${response.status}`);
         return response.json();
       })
       .catch((error) => { throw error; });
   };
+  
+
+  export const getTrendingMoviesImages = (id: string | number) => {
+    return fetch(`${BASE_URL}/trending/${id}/images?api_key=${API_KEY}`)
+      .then((response) => {
+        if (!response.ok) throw new Error("Failed to fetch trending images");
+        return response.json();
+      })
+      .then((json) => json.posters)
+      .catch((error) => { throw error; });
+  };
+  
