@@ -102,6 +102,22 @@ const MovieCard: React.FC<MovieCardProps> = ({movie, action}) => {
           </Button>
         </Link>
       </CardActions>
+      <CardContent>
+        <Grid container>
+          <Grid item xs={6}>
+            <Typography variant="h6" component="p">
+              <CalendarIcon fontSize="small" />
+              {movie.original_language}
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="h6" component="p">
+              <StarRateIcon fontSize="small" />
+              {"  "} {movie.vote_average}{" "}
+            </Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
     </Card>
   );
 }
