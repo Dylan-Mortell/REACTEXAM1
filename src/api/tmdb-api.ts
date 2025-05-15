@@ -62,3 +62,12 @@ export const getMovies = () => {
         return json.results;
       });
   };
+
+  export const getTrendingMovies = () => {
+    return fetch(`https://api.themoviedb.org/3/movie/trending?api_key=${API_KEY}&language=en-US&page=1`)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Unable to fetch trending movies. Status: ${response.status}`);
+        return response.json();
+      })
+      .catch((error) => { throw error; });
+  };
